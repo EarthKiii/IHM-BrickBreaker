@@ -21,6 +21,7 @@ jobs:
       working-directory: qt6
     - name: Step 4 - Building Qt6.5.0
       run: | 
+        choco install ninja
         mkdir qt6-build
         cd qt6-build
         ..\qt6\configure.bat -prefix ${{ github.workspace }}\Qt6.5.0
