@@ -10,6 +10,7 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
+    - uses: actions/checkout@v3
     - name: Step 1 - Building binary
       run: make Ex1.pro
     - name: Step 2 - Uploading artifact
