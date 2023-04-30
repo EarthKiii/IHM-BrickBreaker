@@ -14,7 +14,7 @@ jobs:
     - name: Step 1 - Cloning Git
       run: git clone git://code.qt.io/qt/qt5.git qt6
     - name: Step 2 - Configuring Git
-      run: git switch v6.5.0
+      run: git checkout v6.5.0
       working-directory: qt6
     - name: Step 3 - Fetching sub-modules
       run: perl init-repository
