@@ -25,10 +25,7 @@ jobs:
         name: Brick_Breaker
         path: build
         retention-days: 1
-    - name: Artifact's url
-      uses: montogeek/github-action-comment-artifacts@1.0
+    - name: Artifact Info
+      uses: MOZGIII/artifact-info@v1.0.0
       with:
-        # Prefix message
-        prefix: ""
-        # Prefix message
-        suffix: ""
+        artifact-name: Brick_Breaker
