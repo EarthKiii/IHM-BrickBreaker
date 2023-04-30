@@ -14,12 +14,19 @@ jobs:
     - name: Step 1 - Creating build directory
       run: mkdir build
     - name: Step 2 - Generating makefile
-      run: ${{ github.workspace }}\mingw_64\bin\qmake.exe -makefile -o build\Makefile ${{ github.workspace }}\src\Ex1.pro
+      run: ${{ github.workspace }}\mingw_64\bin\qmake.exe -makefile ${{ github.workspace }}\src\Ex1.pro
+      working-directory: build
     - name: Step 3 - Building binary
-      run: (cd build && make)
+      run: make
+      working-directory: build
     - name: Step 4 - Uploading artifact
       uses: actions/upload-artifact@v3.1.2
       with: 
         name: Brick_Breaker
         path: build
         retention-days: 1
+    - name: Download a Build Artifact
+      uses: actions/download-artifact@v2.1.1
+      with:
+        name: Brick_Breaker
+        path: build
