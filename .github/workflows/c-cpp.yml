@@ -15,10 +15,8 @@ jobs:
       run: mkdir build
     - name: Step 2 - Moving into build directory
       run: cd build
-    - name: Step 3Pre - Downloading Qt5
-      run: choco install qt5-default
     - name: Step 3 - Generating makefile
-      run: qmake -makefile ${{ github.workspace }}/src/Ex1.pro
+      run: ${{ github.workspace }}/mingw_64/bin/qmake.exe -makefile -o Makefile ${{ github.workspace }}/src/Ex1.pro
     - name: Step 4 - Building binary
       run: make
       id: generate-artifact
