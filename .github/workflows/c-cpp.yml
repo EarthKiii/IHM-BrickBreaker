@@ -8,7 +8,7 @@ on:
 
 jobs:
   Building-Qt:
-    runs-on: windows-lastest
+    runs-on: windows-latest
     steps:
     - uses: actions/checkout@v3
     - name: Step 1 - Cloning Git
