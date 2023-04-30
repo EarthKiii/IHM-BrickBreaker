@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  build_and_upload:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v3
@@ -25,3 +25,11 @@ jobs:
         name: Brick_Breaker
         path: build
         retention-days: 1
+  download:
+    runs-on: windows-latest
+    steps:
+      - name: Download a Build Artifact
+        uses: actions/download-artifact@v2.1.1
+        with:
+          # Artifact name
+          name: Brick_Breaker
