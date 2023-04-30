@@ -7,8 +7,27 @@ on:
     branches: [ "main" ]
 
 jobs:
+  Building-Qt:
+    runs-on: windows-lastest
+    steps:
+    - name: Step 1 - Cloning Git
+      run: git clone git://code.qt.io/qt/qt5.git qt6
+    - name: Step 2 - Configuring Git
+      run: git switch v6.5.0
+      working-directory: qt6
+    - name: Step 3 - Fetching sub-modules
+      run: perl init-repository
+      working-directory: qt6
+    - name: Step 4 - Building Qt6.5.0
+      run: | 
+        mkdir qt6-build
+        cd qt6-build
+        ..\qt6\configure.bat -prefix ${{ github.workspace }}\Qt6.5.0
+        cmake --build .
+        cmake --install .
   build_and_upload:
     runs-on: windows-latest
+    needs: Building-Qt
     steps:
     - uses: actions/checkout@v3
     - name: Step 1 - Creating build directory
