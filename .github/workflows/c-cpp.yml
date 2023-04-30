@@ -19,9 +19,10 @@ jobs:
       run: ${{ github.workspace }}/mingw_64/bin/qmake.exe -makefile ${{ github.workspace }}/src/Ex1.pro
     - name: Step 4 - Building binary
       run: make
+      id: generate-artifact
     - name: Step 5 - Uploading artifact
       uses: actions/upload-artifact@v3.1.2
       with: 
         name: Brick_Breaker
-        path: .
+        path: ${{ steps.generate-artifact.outputs.path }}
         retention-days: 1
