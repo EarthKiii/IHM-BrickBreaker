@@ -16,7 +16,7 @@ jobs:
     - name: Step 2 - Moving into build directory
       run: cd build
     - name: Step 3 - Generating makefile
-      run: ${{ github.workspace }}qmake.exe -makefile ${{ github.workspace }}/src/Ex1.pro
+      run: ${{ github.workspace }}/qmake.exe -makefile ${{ github.workspace }}/src/Ex1.pro
     - name: Step 4 - Building binary
       run: make
     - name: Step 5 - Uploading artifact
