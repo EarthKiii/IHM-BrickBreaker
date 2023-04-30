@@ -11,11 +11,15 @@ jobs:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v3
-    - name: Step 1 - Generating makefile
-      run: qmake -makefile
-    - name: Step 2 - Building binary
+    - name: Step 1 - Creating build directory
+      run: mkdir build
+    - name: Step 2 - Moving into build directory
+      run: cd build
+    - name: Step 3 - Generating makefile
+      run: ${{ github.workspace }}/qmake.exe -makefile ${{ github.workspace }}/src/Ex1.pro
+    - name: Step 4 - Building binary
       run: make
-    - name: Step 3 - Uploading artifact
+    - name: Step 5 - Uploading artifact
       uses: actions/upload-artifact@v3.1.2
       with: 
         name: Brick_Breaker
