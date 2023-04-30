@@ -13,8 +13,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: make
-      run: make
+    - name: make Ex1.pro
+      run: make Ex1.pro
     - name: make check
       run: make check
     - name: make distcheck
