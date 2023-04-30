@@ -18,7 +18,7 @@ jobs:
     - name: Step 3 - Generating makefile
       run: ${{ github.workspace }}\mingw_64\bin\qmake.exe -makefile -o build\Makefile ${{ github.workspace }}\src\Ex1.pro
     - name: Step 4 - Building binary
-      run: make
+      run: (cd build && make)
     - name: Step 5 - Uploading artifact
       uses: actions/upload-artifact@v3.1.2
       with: 
