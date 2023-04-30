@@ -25,8 +25,10 @@ jobs:
         name: Brick_Breaker
         path: build
         retention-days: 1
-    - name: Download a Build Artifact
-      uses: actions/download-artifact@v2.1.1
+    - name: Artifact's url
+      uses: montogeek/github-action-comment-artifacts@1.0
       with:
-        name: Brick_Breaker
-        path: build
+        # Prefix message
+        prefix: ""
+        # Prefix message
+        suffix: ""
