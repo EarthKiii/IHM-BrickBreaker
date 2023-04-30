@@ -17,4 +17,5 @@ jobs:
       uses: actions/upload-artifact@v3.1.2
       with: 
         name: Brick_Breaker
-        expires_at: 1
+        path: .
+        retention-days: 1
