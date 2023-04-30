@@ -13,13 +13,11 @@ jobs:
     - uses: actions/checkout@v3
     - name: Step 1 - Creating build directory
       run: mkdir build
-    - name: Step 2 - Moving into build directory
-      run: cd build
-    - name: Step 3 - Generating makefile
+    - name: Step 2 - Generating makefile
       run: ${{ github.workspace }}\mingw_64\bin\qmake.exe -makefile -o build\Makefile ${{ github.workspace }}\src\Ex1.pro
-    - name: Step 4 - Building binary
+    - name: Step 3 - Building binary
       run: (cd build && make)
-    - name: Step 5 - Uploading artifact
+    - name: Step 4 - Uploading artifact
       uses: actions/upload-artifact@v3.1.2
       with: 
         name: Brick_Breaker
