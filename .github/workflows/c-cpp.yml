@@ -25,7 +25,3 @@ jobs:
         name: Brick_Breaker
         path: build
         retention-days: 1
-    - name: Artifact Info
-      uses: MOZGIII/artifact-info@v1.0.0
-      with:
-        artifact-name: Brick_Breaker
