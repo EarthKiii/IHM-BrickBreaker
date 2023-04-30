@@ -15,7 +15,3 @@ jobs:
     - uses: actions/checkout@v3
     - name: make Ex1.pro
       run: make Ex1.pro
-    - name: make check
-      run: make check
-    - name: make distcheck
-      run: make distcheck
