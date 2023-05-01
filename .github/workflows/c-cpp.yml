@@ -27,7 +27,7 @@ jobs:
     - name: Step 5 - Building windows deployement
       run: |
         echo "${{ github.workspace }}\mingw_64\bin" >> $GITHUB_PATH
-        ${{ github.workspace }}\mingw_64\bin\windeployqt.exe --release --compiler-runtime ${{ github.workspace }}\build\release
+        ${{ github.workspace }}\mingw_64\bin\windeployqt.exe --compiler-runtime ${{ github.workspace }}\build\release
     - name: Step 6 - Uploading artifact
       uses: actions/upload-artifact@v3.1.2
       with: 
