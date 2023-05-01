@@ -1,4 +1,4 @@
-name: C/C++ CI
+name: Building app
 
 on:
   push:
@@ -7,37 +7,8 @@ on:
     branches: [ "main" ]
 
 jobs:
-  Building-Qt:
-    runs-on: windows-latest
-    steps:
-    - name: Installing deps
-      run: |
-        choco install git
-        choco install cmake
-        choco install ninja
-        choco install perl
-        choco install python
-        choco install mingw
-        choco install llvm
-    - uses: actions/checkout@v3
-    - name: Step 1 - Cloning Git
-      run: git clone git://code.qt.io/qt/qt5.git qt6
-    - name: Step 2 - Configuring Git
-      run: git checkout v6.5.0
-      working-directory: qt6
-    - name: Step 3 - Fetching sub-modules
-      run: perl init-repository --module-subset=essential
-      working-directory: qt6
-    - name: Step 4 - Building Qt6.5.0
-      run: | 
-        mkdir qt6-build
-        cd qt6-build
-        ..\qt6\configure.bat -prefix ${{ github.workspace }}\Qt6.5.0
-        cmake --build .
-        cmake --install .
   build_and_upload:
     runs-on: windows-latest
-    needs: Building-Qt
     steps:
     - uses: actions/checkout@v3
     - name: Step 1 - Creating build directory
@@ -48,7 +19,12 @@ jobs:
     - name: Step 3 - Building binary
       run: make
       working-directory: build
-    - name: Step 4 - Uploading artifact
+    - name: Step 4 - Building windows deployement
+      run: |
+        set PATH=%PATH%;${{ github.workspace }}\mingw_64\bin\;
+        windeployqt .
+      working-directory: build
+    - name: Step 5 - Uploading artifact
       uses: actions/upload-artifact@v3.1.2
       with: 
         name: Brick_Breaker
