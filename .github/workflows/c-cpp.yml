@@ -22,7 +22,7 @@ jobs:
     - name: Step 4 - Building windows deployement
       run: |
         echo "${{ github.workspace }}\mingw_64\bin" >> $GITHUB_PATH
-        windeployqt .
+        ${{ github.workspace }}\mingw_64\bin\windeployqt.exe .
       working-directory: build
     - name: Step 5 - Uploading artifact
       uses: actions/upload-artifact@v3.1.2
