@@ -11,19 +11,24 @@ jobs:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v3
-    - name: Step 1 - Creating build directory
+    - name: Step 1 - Update Mingw
+      run: |
+        choco install mingw -y
+        choco upgrade mingw -y
+        refreshenv
+    - name: Step 2 - Creating build directory
       run: mkdir build
-    - name: Step 2 - Generating makefile
+    - name: Step 3 - Generating makefile
       run: ${{ github.workspace }}\mingw_64\bin\qmake.exe -makefile ${{ github.workspace }}\src\Ex1.pro
       working-directory: build
-    - name: Step 3 - Building binary
+    - name: Step 4 - Building binary
       run: make
       working-directory: build
-    - name: Step 4 - Building windows deployement
+    - name: Step 5 - Building windows deployement
       run: |
         echo "${{ github.workspace }}\mingw_64\bin" >> $GITHUB_PATH
-        ${{ github.workspace }}\mingw_64\bin\windeployqt.exe --compiler-runtime ${{ github.workspace }}\build\release
-    - name: Step 5 - Uploading artifact
+        ${{ github.workspace }}\mingw_64\bin\windeployqt.exe --release --compiler-runtime ${{ github.workspace }}\build\release
+    - name: Step 6 - Uploading artifact
       uses: actions/upload-artifact@v3.1.2
       with: 
         name: Brick_Breaker
