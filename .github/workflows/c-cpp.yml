@@ -24,7 +24,7 @@ jobs:
         echo "${{ github.workspace }}\mingw_64\bin" >> $GITHUB_PATH
         tree
         ${{ github.workspace }}\mingw_64\bin\windeployqt.exe .
-      working-directory: build
+      working-directory: build/release
     - name: Step 5 - Uploading artifact
       uses: actions/upload-artifact@v3.1.2
       with: 
