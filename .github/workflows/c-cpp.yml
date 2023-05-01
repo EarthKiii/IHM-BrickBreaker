@@ -13,8 +13,8 @@ jobs:
     - uses: actions/checkout@v3
     - name: Step 1 - Update Mingw
       run: |
-        choco install mingw -y
-        choco upgrade mingw -y
+        choco install mingw --version=11.2.0 -y
+        choco upgrade mingw --version=11.2.0 -y
         refreshenv
     - name: Step 2 - Creating build directory
       run: mkdir build
