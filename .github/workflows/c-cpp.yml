@@ -32,7 +32,7 @@ jobs:
       uses: actions/upload-artifact@v3.1.2
       with: 
         name: Brick_Breaker
-        path: build
+        path: build/release
         retention-days: 1
   download:
     runs-on: windows-latest
