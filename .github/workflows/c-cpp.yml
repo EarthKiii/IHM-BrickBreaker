@@ -1,4 +1,4 @@
-name: C/C++ CI
+name: Building app
 
 on:
   push:
@@ -7,21 +7,35 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  build_and_upload:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v3
     - name: Step 1 - Creating build directory
       run: mkdir build
-    - name: Step 2 - Moving into build directory
-      run: cd build
-    - name: Step 3 - Generating makefile
-      run: ${{ github.workspace }}/qmake.exe -makefile ${{ github.workspace }}/src/Ex1.pro
-    - name: Step 4 - Building binary
+    - name: Step 2 - Generating makefile
+      run: ${{ github.workspace }}\mingw_64\bin\qmake.exe -makefile ${{ github.workspace }}\src\Ex1.pro
+      working-directory: build
+    - name: Step 3 - Building binary
       run: make
+      working-directory: build
+    - name: Step 4 - Building windows deployement
+      run: |
+        chmod -R 777 build
+        echo "${{ github.workspace }}\mingw_64\bin" >> $GITHUB_PATH
+        ${{ github.workspace }}\mingw_64\bin\windeployqt.exe ${{ github.workspace }}\build\release
     - name: Step 5 - Uploading artifact
       uses: actions/upload-artifact@v3.1.2
       with: 
         name: Brick_Breaker
-        path: .
+        path: build
         retention-days: 1
+  download:
+    runs-on: windows-latest
+    needs: build_and_upload
+    steps:
+      - name: Download a Build Artifact
+        uses: actions/download-artifact@v3.0.2
+        with:
+          # Artifact name
+          name: Brick_Breaker
